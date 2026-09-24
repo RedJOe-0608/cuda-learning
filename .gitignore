@@ -1,0 +1,11 @@
+# Compiled executables
+*.exe
+
+# CUDA build artifacts
+*.obj
+*.o
+*.ptx
+*.cubin
+
+# Visual Studio
+.vs/
