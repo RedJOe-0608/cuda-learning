@@ -3,6 +3,9 @@ MNIST Data Preprocessing Script
 Downloads MNIST dataset and saves it in binary format for efficient loading
 """
 
+# MNIST has: 60,000 training images. Each image is 28x28 pixels. each image has one label, from 0 to 9
+
+
 import os
 import shutil
 
@@ -21,10 +24,15 @@ mnist_train = datasets.MNIST(
     root="./neural-nets/data", train=True, download=True, transform=transform
 )
 
+print(mnist_train.data.shape) # (60000,28,28)
+
 # Download MNIST test dataset
 mnist_test = datasets.MNIST(
     root="./neural-nets/data", train=False, download=True, transform=transform
 )
+
+# .numpy() converts a pytorch tensor to numpy array. 
+# .rehshape(-1, 784) => (60000, 784) Each training example becomes a single vector of features. 
 
 # Extract and normalize image data (28x28 pixels flattened to 784)
 # Normalize pixel values from [0, 255] to [0.0, 1.0]

@@ -50,7 +50,7 @@ __global__ void softmax_kernel(const float *a, float *b, int num_rows, int num_c
                 sum_exp += expf(a[row * num_cols + col_idx] - max_value); 
         }
 
-        b[row * num_cols + col] = (a[row * num_cols + col] - max_value) / sum_exp;
+        b[row * num_cols + col] = expf(a[row * num_cols + col] - max_value) / sum_exp;
 
     }
 }
