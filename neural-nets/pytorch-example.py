@@ -54,6 +54,9 @@ class MLP(nn.Module):
 
 model = MLP(784,256,10).to("cuda")
 
+torch.save(model.state_dict(), "initial_weights.pth")
+print("Model weights saved!")
+
 # We are effectively telling pytorch, do not calculate gradients for these operations. We are just initialising weights
 with torch.no_grad():
     fan_in_fc1 = model.fc1.weight.size(1)
@@ -212,5 +215,6 @@ if __name__ == "__main__":
     print(f"  Loss computation: {timing_stats['loss_computation']:6.3f}s ({100.0 * timing_stats['loss_computation'] / timing_stats['total_time']:5.1f}%)")
     print(f"  Backward pass:    {timing_stats['backward']:6.3f}s ({100.0 * timing_stats['backward'] / timing_stats['total_time']:5.1f}%)")
     print(f"  Weight updates:   {timing_stats['weight_updates']:6.3f}s ({100.0 * timing_stats['weight_updates'] / timing_stats['total_time']:5.1f}%)")
+
 
     print("Finished Training")
